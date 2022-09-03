@@ -125,7 +125,7 @@ window.addEventListener('scroll', (e) => {
 // Build menu 
 //https://itnext.io/build-a-single-page-web-app-javascript-and-the-dom-90c99b08f8a9
 
-function buildNavbar(e) {
+function buildNavbar() {
     sections.forEach((element) => {
         const listItem = document.createElement("li");
         listItem.classList.add("navbar__list__item");
@@ -133,6 +133,7 @@ function buildNavbar(e) {
         const currentSectionId = element.getAttribute("id");
         listItem.innerHTML = `<a href="#${currentSectionId}" class="nav__hyperlink">${sectionName}</a>`;
         listItem.querySelector('a').addEventListener('click', (e) => {
+            e.preventDefault();
             const topPos = element.getBoundingClientRect().top + window.pageYOffset
             window.scrollTo({
                 top: topPos, // scroll so that the element is at the top of the view
@@ -197,6 +198,8 @@ scrollUp.addEventListener("click", () => {
 // this is the link I used for this code: https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_forms_through_JavaScript
 const form = document.getElementById('contactForm');
 
-form.addEventListener('submit', () => {
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("Thank you for contacting us!");
     // handle the form data, the call back function 
 });
