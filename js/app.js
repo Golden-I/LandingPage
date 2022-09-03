@@ -33,7 +33,7 @@ window.sections = "navbarList";
 //check if an element is in viewport or not (https://www.javascripttutorial.net/dom/css/check-if-an-element-is-visible-in-the-viewport/#:~:text=Use%20the%20getBoundingClientRect()%20method%20to%20get%20the%20size%20of,in%20the%20viewport%20or%20not.)
 function isInViewport(element) {
     const rect = element.getBoundingClientRect();
-    return rect.bottom > 0 &&
+    return rect.bottom > 52 &&
         rect.top < screen.availHeight
 
     // return (
@@ -125,14 +125,14 @@ window.addEventListener('scroll', (e) => {
 // Build menu 
 //https://itnext.io/build-a-single-page-web-app-javascript-and-the-dom-90c99b08f8a9
 
-function buildNavbar() {
+function buildNavbar(e) {
     sections.forEach((element) => {
         const listItem = document.createElement("li");
         listItem.classList.add("navbar__list__item");
         const sectionName = element.getAttribute("data-nav");
         const currentSectionId = element.getAttribute("id");
         listItem.innerHTML = `<a href="#${currentSectionId}" class="nav__hyperlink">${sectionName}</a>`;
-        listItem.querySelector('a').addEventListener('click', () => {
+        listItem.querySelector('a').addEventListener('click', (e) => {
             const topPos = element.getBoundingClientRect().top + window.pageYOffset
             window.scrollTo({
                 top: topPos, // scroll so that the element is at the top of the view
